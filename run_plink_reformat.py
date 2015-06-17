@@ -20,10 +20,15 @@ def twenty3_and_me_files():
 
 def run_plink_format(usable_files):
 	"""Reformat the 23andMe files into plink binary stuff"""
+	try:
+		os.mkdir("23andme_plink")
+	except:
+		print "can't create output-folder"
+		exit
 	for f in usable_files:
 		gid = f.split("/")[-1].split("_")[1].replace("file","")
-		call = "../plink_v190/plink --23file "+ f + " F" + gid + "ID" + gid + "I 1"
-		call += " --out ../plink_binaries/" + gid
+		call = "./plink --23file "+ f + " F" + gid + "ID" + gid + "I 1"
+		call += " --out 23andme_plink/genotypeid_" + gid
 		print "convert gid " + gid
 		subprocess.call(call,shell=True)
 
