@@ -60,6 +60,19 @@ def merge_plink():
 	#x = subprocess.call(["./plink","--bfile",cwd+"/"+start_bed,"--merge-list",cwd + "/merge_list.txt","--make-bed","--out",cwd+"/23andme_merged/merge-pass1"])
 	#print x
 
+	cmd = ''.join([
+    './plink',
+    ' --bfile %s/%s' % (cwd, start_bed),
+    ' --merge-list %s/%s' % (cwd, '/merge_list.txt'),
+    ' --make-bed',
+    ' --out %s/%s' % (cwd, '23andme_merged/merge-pass1')
+    ])
+
+# if subprocess.call doesn't work, copy paste this to debug
+	print cmd
+
+	subprocess.call(cmd, shell=True)
+
 usable_files = twenty3_and_me_files()
 #run_plink_format(usable_files)
 merge_plink()
